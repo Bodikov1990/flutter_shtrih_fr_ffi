@@ -28,12 +28,10 @@ Future<void> backgroundSale(String params) async {
       text: saleParams.text,
     );
   } catch (e) {
+    // cancel if something failed during return
     try {
       await driver.cancelCheck(operatorPassword: saleParams.operatorPassword);
-    } catch (_) {
-      // ignore cancelCheck errors
-    }
-
+    } catch (_) {}
     rethrow;
   } finally {
     driver.deinit();
@@ -68,12 +66,6 @@ Future<void> backgroundCloseCheck(String params) async {
       text: p.text,
     );
   } catch (e) {
-    try {
-      await driver.cancelCheck(operatorPassword: p.operatorPassword);
-    } catch (_) {
-      // ignore cancel errors
-    }
-
     rethrow;
   } finally {
     driver.deinit();

@@ -60,6 +60,11 @@ class StrihFrBindings {
     void Function(Pointer<Void>, double)
   >('Set_DiscountOnCheck');
 
+  static final setPaymentTypeSign = _dll.lookupFunction<
+    Void Function(Pointer<Void>, Int32),
+    void Function(Pointer<Void>, int)
+  >('Set_PaymentTypeSign');
+
   // Commands
   static final connect = _dll.lookupFunction<
     Int32 Function(Pointer<Void>),

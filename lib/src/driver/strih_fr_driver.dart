@@ -33,11 +33,11 @@ class StrihFrDriver {
   ///
   /// [comNumber] — 0 → COM1
   /// [baudRate] — usually 115200
-  /// [timeout]  — timeout in milliseconds.
+  /// [timeout]  — timeout in milliseconds. Timeout in milliseconds; values below 5000 may cause communication errors due to slow device response.
   Future<void> connect({
     required int comNumber,
     required int baudRate,
-    required int timeout,
+    int timeout = 5000,
   }) async {
     _ensureContext();
 
