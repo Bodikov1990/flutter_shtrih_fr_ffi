@@ -1,3 +1,3 @@
-## 0.0.1
+## 0.1.1
 
-* TODO: Describe initial release.
+- Initial release with bindings to `classic_fr_drv_ng.dll`.

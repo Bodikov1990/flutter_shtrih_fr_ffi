@@ -1,29 +1,46 @@
 # flutter_shtrih_fr_ffi
 
-FFI wrapper for the native `classic_fr_drv_ng.dll` library for Windows. This package allows you to control Shtrih-FR fiscal registers using Dart/Flutter desktop apps.
+Dart/Flutter FFI wrapper for the Windows library `classic_fr_drv_ng.dll`. It provides a simple API to control Shtrih‑FR fiscal registers from desktop applications.
 
 ## Installation
 
-Add to your `pubspec.yaml`:
+Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_shtrih_fr_ffi: ^0.1.0
+  flutter_shtrih_fr_ffi: ^0.1.1
+```
 
+Then run `flutter pub get`.
 
-Setup DLL
-Download classic_fr_drv_ng.dll from the official GitHub repo:
-https://github.com/shtrih-m/fr_drv_ng/releases
+## Windows DLL
 
-Place it in your project under:
-windows/classic_fr_drv_ng.dll
+Download `classic_fr_drv_ng.dll` from [Shtrih's GitHub releases](https://github.com/shtrih-m/fr_drv_ng/releases) and place it in
+`windows/classic_fr_drv_ng.dll` inside your Flutter project. Add the following to `windows/runner/CMakeLists.txt` so the DLL is copied next to the executable:
 
-Then modify windows/runner/CMakeLists.txt to copy it after build:
+```cmake
 add_custom_command(
-  TARGET ${BINARY_NAME}
-  POST_BUILD
+  TARGET ${BINARY_NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
     "${CMAKE_CURRENT_SOURCE_DIR}/../classic_fr_drv_ng.dll"
     "$<TARGET_FILE_DIR:${BINARY_NAME}>/classic_fr_drv_ng.dll"
   COMMENT "Copying classic_fr_drv_ng.dll after build"
 )
+```
+
+## Example
+
+```dart
+final kkm = FlutterStrihFrFFI();
+
+await kkm.printReportWithoutCleaning(
+  reportParams: ConnectionParams(
+    comNumber: 8,
+    baudRate: 115200,
+    timeout: 1000,
+    operatorPassword: 30,
+  ),
+);
+```
+
+See the [example](example/lib/main.dart) folder for a complete demo.
