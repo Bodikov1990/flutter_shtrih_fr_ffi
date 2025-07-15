@@ -44,3 +44,8 @@ await kkm.printReportWithoutCleaning(
 ```
 
 See the [example](example/lib/main.dart) folder for a complete demo. Or full [example app](https://github.com/Bodikov1990/flutter_example_app_shtrih_fr) where included `windows/classic_fr_drv_ng.dll` and `windows/runner/CMakeLists.txt`.
+
+## Additional information
+
+The project is under development and ready for your pull-requests and issues 👍
+Thank you for support ❤️
