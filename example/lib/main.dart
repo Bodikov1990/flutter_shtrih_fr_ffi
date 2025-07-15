@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shtrih_fr_ffi/flutter_shtrih_fr.dart';
+import 'package:flutter_shtrih_fr_ffi/flutter_shtrih_fr_ffi.dart';
 
 void main() {
   runApp(

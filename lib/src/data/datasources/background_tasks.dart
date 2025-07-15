@@ -1,4 +1,4 @@
-import 'package:flutter_shtrih_fr_ffi/flutter_shtrih_fr.dart';
+import 'package:flutter_shtrih_fr_ffi/flutter_shtrih_fr_ffi.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/close_check_params.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/return_sale_params.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/sale_params.dart';
