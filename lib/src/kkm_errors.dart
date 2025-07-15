@@ -1,7 +1,27 @@
 /// Human readable messages for error codes.
 const errorsKKM = {
-  "unknown_error_code": "Unknown error",
-  "successful_execution_of_command": "Command executed successfully",
+  'unknown_error_code': 'Unknown error',
+  'protection_key_not_found':
+      'Protection key not found / license not entered / license invalid',
+  'port_blocked': 'Port is blocked',
+  'port_not_open': 'Port not open',
+  'failed_to_connect_to_server': 'Failed to connect to server',
+  'cannot_change_baudrate_in_trk':
+      'Cannot change baud rate when working through the TRK control unit',
+  'cannot_remove_active_logical_device':
+      'Cannot remove an active logical device',
+  'check_subtotal_not_changed': 'Check subtotal did not change',
+  'not_supported_in_this_driver_version':
+      'Not supported in this driver version',
+  'protocol_error': 'Protocol error',
+  'invalid_logical_device_number': 'Invalid logical device number',
+  'parameter_out_of_range': 'Parameter out of range',
+  'unrecognized_error': 'Unrecognized error',
+  'invalid_response_length': 'Invalid response length',
+  'no_connection': 'No connection',
+  'serial_port_busy': 'COM port is busy (in use by another application)',
+  'serial_port_unavailable': 'COM port unavailable',
+  'successful_execution_of_command': 'Command executed successfully',
   "unknown_command_invalid_packet_format_or_unknown_parameters":
       "Unknown command, invalid packet format or unknown parameters",
   "invalid_fn_state_requires_different_state":
@@ -18,14 +38,12 @@ const errorsKKM = {
       "Requested data not found in fiscal storage archive",
   "incorrect_command_parameter_value":
       "Incorrect command parameter value. Parameters have correct format but invalid value",
-  "tlv_data_size_exceeded_limit":
-      "TLV data size exceeded limit",
+  "tlv_data_size_exceeded_limit": "TLV data size exceeded limit",
   "no_transport_connection_establish_ofd":
       "No transport connection. Establish a connection with OFD and send the 'Transport connection with OFD' command",
   "crypto_coprocessor_resource_exhausted":
       "Cryptographic coprocessor resource exhausted. Fiscal mode must be closed",
-  "ofd_storage_resource_exhausted":
-      "OFD storage resource exhausted",
+  "ofd_storage_resource_exhausted": "OFD storage resource exhausted",
   "message_queue_waiting_resource_exhausted":
       "Message queue waiting resource exhausted (old message over 30 days)",
   "shift_duration_exceeds_24_hours": "Shift duration exceeds 24 hours",
@@ -40,7 +58,8 @@ const errorsKKM = {
       "Cash register zeroed (repeat closing impossible)",
   "section_total_less_than_void_amount":
       "Section receipt total is less than void amount",
-  "insufficient_funds_in_kkt_for_payout": "Insufficient funds in cash register for payout",
+  "insufficient_funds_in_kkt_for_payout":
+      "Insufficient funds in cash register for payout",
   "kkt_locked_awaiting_tax_inspector_password":
       "Cash register locked awaiting tax inspector password",
   "general_closing_required": "General closing required",
@@ -61,8 +80,7 @@ const errorsKKM = {
   "shift_not_open_operation_not_allowed":
       "Shift not open – operation impossible",
   "section_accumulation_overflow": "Section accumulation overflow in shift",
-  "discount_accumulation_overflow":
-      "Discount accumulation overflow in shift",
+  "discount_accumulation_overflow": "Discount accumulation overflow in shift",
   "discount_range_overflow": "Discount range overflow",
   "cash_payment_range_overflow": "Cash payment range overflow",
   "payment_type_2_range_overflow": "Payment type 2 range overflow",
@@ -83,8 +101,7 @@ const errorsKKM = {
       "Non-cash payment exceeds receipt total",
   "shift_exceeds_24_hours": "Shift exceeds 24 hours",
   "invalid_password": "Invalid password",
-  "printing_previous_command_results":
-      "Printing previous command results",
+  "printing_previous_command_results": "Printing previous command results",
   "cash_accumulation_overflow": "Cash accumulation overflow in shift",
   "payment_type_2_accumulation_overflow":
       "Payment type 2 accumulation overflow in shift",
@@ -92,7 +109,8 @@ const errorsKKM = {
       "Payment type 3 accumulation overflow in shift",
   "payment_type_4_accumulation_overflow":
       "Payment type 4 accumulation overflow in shift",
-  "receipt_closed_operation_not_allowed": "Receipt closed – operation impossible",
+  "receipt_closed_operation_not_allowed":
+      "Receipt closed – operation impossible",
   "no_document_to_repeat": "No document to repeat",
   "awaiting_continue_print": "Waiting for continue print command",
   "document_opened_by_other_cashier": "Document opened by another cashier",
@@ -142,20 +160,17 @@ const errorsKKM = {
   "zero_receipt_total": "Zero receipt total",
   "cash_register_not_registered": "Cash register not registered",
   "field_size_exceeded": "Field size exceeded",
-  "print_field_overflow":
-      "Print field overflow with current font settings",
+  "print_field_overflow": "Print field overflow with current font settings",
   "field_overlap": "Field overlap",
   "ram_restore_success": "RAM restore successful",
   "receipt_operation_limit_exhausted": "Receipt operation limit exhausted",
   "perform_shift_closure_report": "Perform shift closure report",
   "invalid_action": "Invalid action",
   "item_not_found_in_database": "Item not found in goods database",
-  "invalid_item_record_data":
-      "Invalid data in item record in goods database",
+  "invalid_item_record_data": "Invalid data in item record in goods database",
   "invalid_database_file_size":
       "Invalid size of goods database or registers file",
-  "datetime_control_error":
-      "Date and time control (confirm date and time)",
+  "datetime_control_error": "Date and time control (confirm date and time)",
   "power_supply_voltage_exceeded": "Power supply voltage exceeded",
   "shift_numbers_mismatch": "Shift numbers mismatch",
   "slip_buffer_empty": "Slip buffer empty",
@@ -166,8 +181,7 @@ const errorsKKM = {
   "printhead_overheat": "Printhead overheat",
   "temperature_out_of_range": "Temperature out of range",
   "invalid_receipt_subtotal": "Invalid receipt subtotal",
-  "minimum_free_memory_limit_exceeded":
-      "Minimum free memory limit exceeded",
+  "minimum_free_memory_limit_exceeded": "Minimum free memory limit exceeded",
   "invalid_date_clock_reset": "Invalid date (Clock reset? Set the date!)",
   "journal_report_not_printed": "Journal report not printed!",
   "buffer_empty": "Buffer empty",
@@ -182,7 +196,25 @@ const errorsKKM = {
 
 /// Mapping of numeric error codes to keys.
 const Map<int, String> _codeMap = {
-  -1: 'unknown_error_code',
+  -19: 'protection_key_not_found',
+  -18: 'port_blocked',
+  -17: 'port_not_open',
+  -16: 'failed_to_connect_to_server',
+  -15: 'cannot_change_baudrate_in_trk',
+  -14: 'cannot_remove_active_logical_device',
+  -13: 'check_subtotal_not_changed',
+  -12: 'not_supported_in_this_driver_version',
+  -11: 'protocol_error',
+  -10: 'invalid_logical_device_number',
+  -9: 'parameter_out_of_range',
+  -8: 'unrecognized_error',
+  -7: 'invalid_response_length',
+  -6: 'no_connection',
+  -5: 'no_connection',
+  -4: 'no_connection',
+  -3: 'serial_port_busy',
+  -2: 'serial_port_unavailable',
+  -1: 'no_connection',
   0: 'successful_execution_of_command',
   1: 'unknown_command_invalid_packet_format_or_unknown_parameters',
   2: 'invalid_fn_state_requires_different_state',
