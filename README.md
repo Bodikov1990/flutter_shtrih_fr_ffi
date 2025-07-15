@@ -35,12 +35,12 @@ final kkm = FlutterStrihFrFFI();
 
 await kkm.printReportWithoutCleaning(
   reportParams: ConnectionParams(
-    comNumber: 8,
+    comNumber: 8, //Local com-port
     baudRate: 115200,
-    timeout: 1000,
+    timeout: 5000, //Timeout in milliseconds; values below 5000 may cause communication errors due to slow device response.
     operatorPassword: 30,
   ),
 );
 ```
 
-See the [example](example/lib/main.dart) folder for a complete demo.
+See the [example](example/lib/main.dart) folder for a complete demo. Or full [example app](https://github.com/Bodikov1990/flutter_example_app_shtrih_fr) where included `windows/classic_fr_drv_ng.dll` and `windows/runner/CMakeLists.txt`.
