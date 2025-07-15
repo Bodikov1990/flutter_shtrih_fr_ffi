@@ -1,6 +1,6 @@
 name: flutter_shtrih_fr_ffi
 description: A Dart/Flutter wrapper for the Windows driver classic_fr_drv_ng.dll used to control the Shtrih-FR fiscal register.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/Bodikov1990/flutter_shtrih_fr_ffi
 repository: https://github.com/Bodikov1990/flutter_shtrih_fr_ffi
 issue_tracker: https://github.com/Bodikov1990/flutter_shtrih_fr_ffi/issues
