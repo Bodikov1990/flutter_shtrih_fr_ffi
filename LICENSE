@@ -20,4 +20,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-This project includes the file `classic_fr_drv_ng.dll` from https://github.com/shtrih-m/fr_drv_ng/releases and was developed using documentation from https://github.com/shtrih-m/fr_drv_ng. The original library is distributed under the MIT License.
+---
+
+### External Dependencies
+
+This project uses the Windows dynamic library `classic_fr_drv_ng.dll`, which is available at:
+
+- https://github.com/shtrih-m/fr_drv_ng
+- https://github.com/shtrih-m/fr_drv_ng/releases
+
+The original native library is maintained by **Shtrih-M** and distributed under its own [MIT License](https://github.com/shtrih-m/fr_drv_ng/blob/master/LICENSE).  
+This Dart/Flutter wrapper was developed based on publicly available headers and documentation from that project.
+
