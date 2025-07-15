@@ -1,39 +1,29 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# flutter_shtrih_fr_ffi
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+FFI wrapper for the native `classic_fr_drv_ng.dll` library for Windows. This package allows you to control Shtrih-FR fiscal registers using Dart/Flutter desktop apps.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## Installation
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Add to your `pubspec.yaml`:
 
-## Features
+```yaml
+dependencies:
+  flutter_shtrih_fr_ffi: ^0.1.0
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
 
-## Getting started
+Setup DLL
+Download classic_fr_drv_ng.dll from the official GitHub repo:
+https://github.com/shtrih-m/fr_drv_ng/releases
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Place it in your project under:
+windows/classic_fr_drv_ng.dll
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Then modify windows/runner/CMakeLists.txt to copy it after build:
+add_custom_command(
+  TARGET ${BINARY_NAME}
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${CMAKE_CURRENT_SOURCE_DIR}/../classic_fr_drv_ng.dll"
+    "$<TARGET_FILE_DIR:${BINARY_NAME}>/classic_fr_drv_ng.dll"
+  COMMENT "Copying classic_fr_drv_ng.dll after build"
+)
