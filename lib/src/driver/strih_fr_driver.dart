@@ -220,11 +220,8 @@ class StrihFrDriver {
       StrihFrBindings.setPassword(_ctx, operatorPassword);
       // 2) Switch to return mode
       StrihFrBindings.setCheckType(_ctx, CheckType.returnSale);
-      // 3) Open return check
-      final openCode = StrihFrBindings.openCheck(_ctx);
-      if (openCode != 0) throw Exception(_strihErrorMessage(openCode));
 
-      // 4) Set item parameters
+      // 3) Set item parameters
       StrihFrBindings.setQuantity(_ctx, quantity);
       StrihFrBindings.setPrice(_ctx, price);
       StrihFrBindings.setDepartment(_ctx, department);
@@ -235,7 +232,7 @@ class StrihFrDriver {
       final ptr = text.toNativeUtf8();
       StrihFrBindings.setStringForPrinting(_ctx, ptr, text.length);
 
-      // 5) Print return item
+      // 4) Print return item
       final returnCode = StrihFrBindings.returnSale(_ctx);
       calloc.free(ptr);
       if (returnCode != 0) throw Exception(_strihErrorMessage(returnCode));
