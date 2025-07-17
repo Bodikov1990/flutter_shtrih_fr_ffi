@@ -5,3 +5,7 @@
 ## 0.1.2
 
 - LICENSE updated.
+
+## 0.1.3
+
+- Fixed returnSale.
