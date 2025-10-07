@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'validation_exception.dart';
+
 /// Parameters required to establish a connection with the fiscal register.
 class ConnectionParams {
   /// COM port number (0 -> COM1).
@@ -15,12 +17,43 @@ class ConnectionParams {
   final int operatorPassword;
 
   /// Creates a new set of connection parameters.
+  ///
+  /// Throws [ValidationException] if any parameter is invalid:
+  /// - [comNumber] must be between 0 and 255
+  /// - [baudRate] must be positive
+  /// - [timeout] must be positive (recommended >= 5000)
+  /// - [operatorPassword] must be between 0 and 99999999
   ConnectionParams({
     required this.comNumber,
     required this.baudRate,
     required this.timeout,
     required this.operatorPassword,
-  });
+  }) {
+    if (comNumber < 0 || comNumber > 255) {
+      throw ValidationException(
+        'Must be between 0 and 255',
+        parameterName: 'comNumber',
+      );
+    }
+    if (baudRate <= 0) {
+      throw ValidationException(
+        'Must be positive',
+        parameterName: 'baudRate',
+      );
+    }
+    if (timeout <= 0) {
+      throw ValidationException(
+        'Must be positive (recommended >= 5000 ms)',
+        parameterName: 'timeout',
+      );
+    }
+    if (operatorPassword < 0 || operatorPassword > 99999999) {
+      throw ValidationException(
+        'Must be between 0 and 99999999',
+        parameterName: 'operatorPassword',
+      );
+    }
+  }
 
   /// Converts the params into a [Map] for JSON encoding.
   Map<String, dynamic> toMap() {

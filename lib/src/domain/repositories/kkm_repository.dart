@@ -6,7 +6,7 @@ abstract class KkmRepository {
   /// Executes sale commands for each item and then closes the check.
   Future<void> saleAndCloseCheck({
     required ConnectionParams reportParams,
-    required List<ItemModel> discounts,
+    required List<ItemModel> items,
     required int totalSumm1,
     required int totalSumm2,
     required int totalSumm3,
@@ -22,7 +22,7 @@ abstract class KkmRepository {
   /// Executes a return sale and closes the check.
   Future<void> returnSale({
     required ConnectionParams reportParams,
-    required List<ItemModel> discounts,
+    required List<ItemModel> items,
     required int totalSumm1,
     required int totalSumm2,
     required int totalSumm3,
