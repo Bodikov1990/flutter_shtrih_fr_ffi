@@ -23,7 +23,7 @@ class _StrihFrDemoScreenState extends State<StrihFrDemoScreen> {
 
   static const int _comNumber = 8;
   static const int _baudRate = 115200;
-  static const int _timeout = 1000;
+  static const int _timeout = 5000;
   static const int _operatorPassword = 30;
 
   String _status = 'Ready';
@@ -104,7 +104,7 @@ class _StrihFrDemoScreenState extends State<StrihFrDemoScreen> {
                   () => _run(
                     () => _strihFr.saleAndCloseCheck(
                       reportParams: _reportParams,
-                      discounts: _examplePositions,
+                      items: _examplePositions,
                       totalSumm1: _totalSum,
                       totalSumm2: 0,
                       totalSumm3: 0,
@@ -126,7 +126,7 @@ class _StrihFrDemoScreenState extends State<StrihFrDemoScreen> {
                   () => _run(
                     () => _strihFr.returnSale(
                       reportParams: _reportParams,
-                      discounts: _examplePositions,
+                      items: _examplePositions,
                       totalSumm1: _totalSum,
                       totalSumm2: 0,
                       totalSumm3: 0,

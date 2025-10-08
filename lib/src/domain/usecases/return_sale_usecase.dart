@@ -13,7 +13,7 @@ class ReturnSaleUseCase {
   /// Executes the use case.
   Future<void> execute({
     required ConnectionParams reportParams,
-    required List<ItemModel> discounts,
+    required List<ItemModel> items,
     required int totalSumm1,
     required int totalSumm2,
     required int totalSumm3,
@@ -27,7 +27,7 @@ class ReturnSaleUseCase {
   }) async {
     await repository.returnSale(
       reportParams: reportParams,
-      discounts: discounts,
+      items: items,
       totalSumm1: totalSumm1,
       totalSumm2: totalSumm2,
       totalSumm3: totalSumm3,

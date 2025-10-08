@@ -43,7 +43,7 @@ class FlutterStrihFrFFI {
   /// Performs sale operations for each item and then closes the check.
   Future<void> saleAndCloseCheck({
     required ConnectionParams reportParams,
-    required List<ItemModel> discounts,
+    required List<ItemModel> items,
     required int totalSumm1,
     required int totalSumm2,
     required int totalSumm3,
@@ -57,7 +57,7 @@ class FlutterStrihFrFFI {
   }) {
     return SaleAndCloseCheckUseCase(_repo).execute(
       reportParams: reportParams,
-      discounts: discounts,
+      items: items,
       totalSumm1: totalSumm1,
       totalSumm2: totalSumm2,
       totalSumm3: totalSumm3,
@@ -74,7 +74,7 @@ class FlutterStrihFrFFI {
   /// Performs a return sale operation followed by closing the check.
   Future<void> returnSale({
     required ConnectionParams reportParams,
-    required List<ItemModel> discounts,
+    required List<ItemModel> items,
     required int totalSumm1,
     required int totalSumm2,
     required int totalSumm3,
@@ -88,7 +88,7 @@ class FlutterStrihFrFFI {
   }) {
     return ReturnSaleUseCase(_repo).execute(
       reportParams: reportParams,
-      discounts: discounts,
+      items: items,
       totalSumm1: totalSumm1,
       totalSumm2: totalSumm2,
       totalSumm3: totalSumm3,
