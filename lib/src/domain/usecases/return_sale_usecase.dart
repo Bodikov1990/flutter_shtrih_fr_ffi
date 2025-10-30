@@ -1,4 +1,5 @@
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/connection_params.dart';
+import 'package:flutter_shtrih_fr_ffi/src/domain/entities/customer_info.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/item_model.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/repositories/kkm_repository.dart';
 
@@ -11,6 +12,8 @@ class ReturnSaleUseCase {
   ReturnSaleUseCase(this.repository);
 
   /// Executes the use case.
+  ///
+  /// [customerInfo] — optional customer information for tags (email, TIN).
   Future<void> execute({
     required ConnectionParams reportParams,
     required List<ItemModel> items,
@@ -24,6 +27,7 @@ class ReturnSaleUseCase {
     required int tax3,
     required int tax4,
     required double discountOnCheck,
+    CustomerInfo? customerInfo,
   }) async {
     await repository.returnSale(
       reportParams: reportParams,
@@ -38,6 +42,7 @@ class ReturnSaleUseCase {
       tax3: tax3,
       tax4: tax4,
       discountOnCheck: discountOnCheck,
+      customerInfo: customerInfo,
     );
   }
 }

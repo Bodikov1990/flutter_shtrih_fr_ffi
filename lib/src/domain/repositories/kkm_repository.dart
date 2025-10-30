@@ -1,9 +1,12 @@
+import 'package:flutter_shtrih_fr_ffi/src/domain/entities/customer_info.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/item_model.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/connection_params.dart';
 
 /// Contract for repository implementations that communicate with the KKM.
 abstract class KkmRepository {
   /// Executes sale commands for each item and then closes the check.
+  ///
+  /// [customerInfo] — optional customer information (email, TIN) to send as tags.
   Future<void> saleAndCloseCheck({
     required ConnectionParams reportParams,
     required List<ItemModel> items,
@@ -17,9 +20,12 @@ abstract class KkmRepository {
     required int tax3,
     required int tax4,
     required double discountOnCheck,
+    CustomerInfo? customerInfo,
   });
 
   /// Executes a return sale and closes the check.
+  ///
+  /// [customerInfo] — optional customer information (email, TIN) to send as tags.
   Future<void> returnSale({
     required ConnectionParams reportParams,
     required List<ItemModel> items,
@@ -33,6 +39,7 @@ abstract class KkmRepository {
     required int tax3,
     required int tax4,
     required double discountOnCheck,
+    CustomerInfo? customerInfo,
   });
 
   /// Prints a shift report without cleaning.

@@ -2,6 +2,7 @@ import 'package:flutter_shtrih_fr_ffi/flutter_shtrih_fr_ffi.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/close_check_params.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/return_sale_params.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/sale_params.dart';
+import 'package:flutter_shtrih_fr_ffi/src/domain/entities/send_tag_params.dart';
 import 'package:flutter_shtrih_fr_ffi/src/driver/strih_fr_driver.dart';
 
 /// Executes a sale operation using [StrihFrDriver] in an isolate.
@@ -142,6 +143,30 @@ Future<void> backgroundPrintReportWithCleaning(String jsonParams) async {
     try {
       await driver.cancelCheck(operatorPassword: p.operatorPassword);
     } catch (_) {}
+    rethrow;
+  } finally {
+    driver.deinit();
+  }
+}
+
+/// Sends a custom TLV tag in an isolate.
+Future<void> backgroundSendTag(String jsonParams) async {
+  final p = SendTagParams.fromJson(jsonParams);
+  final driver = StrihFrDriver();
+  try {
+    await driver.connect(
+      comNumber: p.comNumber,
+      baudRate: p.baudRate,
+      timeout: p.timeout,
+    );
+
+    await driver.sendTag(
+      tagNumber: p.tagNumber,
+      tagType: p.tagType,
+      tagValue: p.tagValue,
+      operatorPassword: p.operatorPassword,
+    );
+  } catch (e) {
     rethrow;
   } finally {
     driver.deinit();
