@@ -4,4 +4,6 @@ library flutter_shtrih_fr_ffi;
 export 'src/domain/entities/item_model.dart';
 export 'src/domain/entities/connection_params.dart';
 export 'src/domain/entities/validation_exception.dart';
+export 'src/domain/entities/customer_info.dart';
+export 'src/domain/entities/tag_types.dart';
 export 'flutter_shtrih_fr.dart';

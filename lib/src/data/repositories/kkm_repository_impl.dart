@@ -1,7 +1,10 @@
 import 'package:flutter_shtrih_fr_ffi/src/data/datasources/kkm_local_datasource.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/close_check_params.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/connection_params.dart';
+import 'package:flutter_shtrih_fr_ffi/src/domain/entities/customer_info.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/entities/item_model.dart';
+import 'package:flutter_shtrih_fr_ffi/src/domain/entities/send_tag_params.dart';
+import 'package:flutter_shtrih_fr_ffi/src/domain/entities/tag_types.dart';
 import 'package:flutter_shtrih_fr_ffi/src/domain/repositories/kkm_repository.dart';
 
 import '../../domain/entities/sale_params.dart';
@@ -45,6 +48,7 @@ class KkmRepositoryImpl implements KkmRepository {
     required int tax3,
     required int tax4,
     required double discountOnCheck,
+    CustomerInfo? customerInfo,
   }) async {
     for (ItemModel item in items) {
       final saleParams = SaleParams(
@@ -63,6 +67,12 @@ class KkmRepositoryImpl implements KkmRepository {
       );
       await remote.returnSale(saleParams.toJson());
     }
+
+    // Send customer tags if provided
+    if (customerInfo != null) {
+      await _sendCustomerTags(reportParams, customerInfo);
+    }
+
     final closeCheckParams = CloseCheckParams(
       comNumber: reportParams.comNumber,
       baudRate: reportParams.baudRate,
@@ -97,6 +107,7 @@ class KkmRepositoryImpl implements KkmRepository {
     required int tax3,
     required int tax4,
     required double discountOnCheck,
+    CustomerInfo? customerInfo,
   }) async {
     for (ItemModel item in items) {
       final saleParams = SaleParams(
@@ -115,6 +126,12 @@ class KkmRepositoryImpl implements KkmRepository {
       );
       await remote.sale(saleParams.toJson());
     }
+
+    // Send customer tags if provided
+    if (customerInfo != null) {
+      await _sendCustomerTags(reportParams, customerInfo);
+    }
+
     final closeCheckParams = CloseCheckParams(
       comNumber: reportParams.comNumber,
       baudRate: reportParams.baudRate,
@@ -132,5 +149,39 @@ class KkmRepositoryImpl implements KkmRepository {
       text: '',
     );
     await remote.closeCheck(closeCheckParams.toJson());
+  }
+
+  /// Helper method to send customer tags (email, TIN).
+  Future<void> _sendCustomerTags(
+    ConnectionParams reportParams,
+    CustomerInfo customerInfo,
+  ) async {
+    // Send email tag (1008) if provided
+    if (customerInfo.email != null) {
+      final emailTagParams = SendTagParams(
+        comNumber: reportParams.comNumber,
+        baudRate: reportParams.baudRate,
+        timeout: reportParams.timeout,
+        operatorPassword: reportParams.operatorPassword,
+        tagNumber: TagNumber.customerEmail,
+        tagType: TagType.string,
+        tagValue: customerInfo.email!,
+      );
+      await remote.sendTag(emailTagParams.toJson());
+    }
+
+    // Send TIN tag (1228) if provided
+    if (customerInfo.tin != null) {
+      final tinTagParams = SendTagParams(
+        comNumber: reportParams.comNumber,
+        baudRate: reportParams.baudRate,
+        timeout: reportParams.timeout,
+        operatorPassword: reportParams.operatorPassword,
+        tagNumber: TagNumber.customerTIN,
+        tagType: TagType.string,
+        tagValue: customerInfo.tin!,
+      );
+      await remote.sendTag(tinTagParams.toJson());
+    }
   }
 }

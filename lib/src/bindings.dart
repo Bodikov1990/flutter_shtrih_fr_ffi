@@ -65,6 +65,34 @@ class StrihFrBindings {
     void Function(Pointer<Void>, int)
   >('Set_PaymentTypeSign');
 
+  // TLV Tags - работа с тегами
+  static final setTagNumber = _dll.lookupFunction<
+    Void Function(Pointer<Void>, Int32),
+    void Function(Pointer<Void>, int)
+  >('Set_TagNumber');
+  static final getTagNumber = _dll.lookupFunction<
+    Int32 Function(Pointer<Void>),
+    int Function(Pointer<Void>)
+  >('Get_TagNumber');
+  static final setTagType = _dll.lookupFunction<
+    Void Function(Pointer<Void>, Int32),
+    void Function(Pointer<Void>, int)
+  >('Set_TagType');
+  static final setTagValueStr = _dll.lookupFunction<
+    Void Function(Pointer<Void>, Pointer<Utf8>, IntPtr),
+    void Function(Pointer<Void>, Pointer<Utf8>, int)
+  >('Set_TagValueStr');
+  static final setTagValueInt = _dll.lookupFunction<
+    Void Function(Pointer<Void>, Uint64),
+    void Function(Pointer<Void>, int)
+  >('Set_TagValueInt');
+
+  // Customer Email
+  static final setCustomerEmail = _dll.lookupFunction<
+    Void Function(Pointer<Void>, Pointer<Utf8>, IntPtr),
+    void Function(Pointer<Void>, Pointer<Utf8>, int)
+  >('Set_CustomerEmail');
+
   // Commands
   static final connect = _dll.lookupFunction<
     Int32 Function(Pointer<Void>),
@@ -100,4 +128,20 @@ class StrihFrBindings {
     Int32 Function(Pointer<Void>),
     int Function(Pointer<Void>)
   >('PrintReportWithCleaning');
+
+  // TLV Tag Commands
+  static final fnSendTag = _dll.lookupFunction<
+    Int32 Function(Pointer<Void>),
+    int Function(Pointer<Void>)
+  >('FNSendTag');
+  static final fnSendCustomerEmail = _dll.lookupFunction<
+    Int32 Function(Pointer<Void>),
+    int Function(Pointer<Void>)
+  >('FNSendCustomerEmail');
+
+  // Print String
+  static final printString = _dll.lookupFunction<
+    Int32 Function(Pointer<Void>),
+    int Function(Pointer<Void>)
+  >('PrintString');
 }

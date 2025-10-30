@@ -240,4 +240,92 @@ class StrihFrDriver {
       throw Exception('returnSale failed: $e');
     }
   }
+
+  /// Sends a custom TLV tag to the fiscal register.
+  ///
+  /// [tagNumber]       — tag number (e.g., 1008 for email, 1228 for TIN)
+  /// [tagType]         — tag data type (use TagType constants)
+  /// [tagValue]        — tag value as string
+  /// [operatorPassword] — operator password
+  ///
+  /// IMPORTANT: Call this AFTER registering items but BEFORE closing the check.
+  Future<void> sendTag({
+    required int tagNumber,
+    required int tagType,
+    required String tagValue,
+    required int operatorPassword,
+  }) async {
+    _ensureContext();
+
+    try {
+      StrihFrBindings.setPassword(_ctx, operatorPassword);
+      StrihFrBindings.setTagNumber(_ctx, tagNumber);
+      StrihFrBindings.setTagType(_ctx, tagType);
+
+      final ptr = tagValue.toNativeUtf8();
+      StrihFrBindings.setTagValueStr(_ctx, ptr, tagValue.length);
+
+      final code = StrihFrBindings.fnSendTag(_ctx);
+      calloc.free(ptr);
+
+      if (code != 0) throw Exception(_strihErrorMessage(code));
+    } catch (e) {
+      throw Exception('sendTag failed: $e');
+    }
+  }
+
+  /// Sends customer email to the fiscal register (tag 1008).
+  /// Used for sending electronic receipt to customer's email.
+  ///
+  /// [email]           — customer email address
+  /// [operatorPassword] — operator password
+  ///
+  /// IMPORTANT: Call this AFTER registering items but BEFORE closing the check.
+  Future<void> sendCustomerEmail({
+    required String email,
+    required int operatorPassword,
+  }) async {
+    _ensureContext();
+
+    try {
+      StrihFrBindings.setPassword(_ctx, operatorPassword);
+
+      final ptr = email.toNativeUtf8();
+      StrihFrBindings.setCustomerEmail(_ctx, ptr, email.length);
+
+      final code = StrihFrBindings.fnSendCustomerEmail(_ctx);
+      calloc.free(ptr);
+
+      if (code != 0) throw Exception(_strihErrorMessage(code));
+    } catch (e) {
+      throw Exception('sendCustomerEmail failed: $e');
+    }
+  }
+
+  /// Prints a string on the receipt.
+  /// Supports automatic recognition of TIN when formatted as:
+  /// "ИИН/БИН клиента: 123456789123"
+  ///
+  /// [text]            — text to print
+  /// [operatorPassword] — operator password
+  Future<void> printString({
+    required String text,
+    required int operatorPassword,
+  }) async {
+    _ensureContext();
+
+    try {
+      StrihFrBindings.setPassword(_ctx, operatorPassword);
+
+      final ptr = text.toNativeUtf8();
+      StrihFrBindings.setStringForPrinting(_ctx, ptr, text.length);
+
+      final code = StrihFrBindings.printString(_ctx);
+      calloc.free(ptr);
+
+      if (code != 0) throw Exception(_strihErrorMessage(code));
+    } catch (e) {
+      throw Exception('printString failed: $e');
+    }
+  }
 }

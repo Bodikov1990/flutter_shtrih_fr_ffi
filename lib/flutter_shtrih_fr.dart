@@ -41,6 +41,11 @@ class FlutterStrihFrFFI {
   }
 
   /// Performs sale operations for each item and then closes the check.
+  ///
+  /// [customerInfo] — optional customer information (email, phone, TIN).
+  /// If provided, the corresponding tags will be sent to the fiscal register:
+  /// - email → tag 1008
+  /// - tin → tag 1228
   Future<void> saleAndCloseCheck({
     required ConnectionParams reportParams,
     required List<ItemModel> items,
@@ -54,6 +59,7 @@ class FlutterStrihFrFFI {
     required int tax3,
     required int tax4,
     required double discountOnCheck,
+    CustomerInfo? customerInfo,
   }) {
     return SaleAndCloseCheckUseCase(_repo).execute(
       reportParams: reportParams,
@@ -68,10 +74,16 @@ class FlutterStrihFrFFI {
       tax3: tax3,
       tax4: tax4,
       discountOnCheck: discountOnCheck,
+      customerInfo: customerInfo,
     );
   }
 
   /// Performs a return sale operation followed by closing the check.
+  ///
+  /// [customerInfo] — optional customer information (email, phone, TIN).
+  /// If provided, the corresponding tags will be sent to the fiscal register:
+  /// - email → tag 1008
+  /// - tin → tag 1228
   Future<void> returnSale({
     required ConnectionParams reportParams,
     required List<ItemModel> items,
@@ -85,6 +97,7 @@ class FlutterStrihFrFFI {
     required int tax3,
     required int tax4,
     required double discountOnCheck,
+    CustomerInfo? customerInfo,
   }) {
     return ReturnSaleUseCase(_repo).execute(
       reportParams: reportParams,
@@ -99,6 +112,7 @@ class FlutterStrihFrFFI {
       tax3: tax3,
       tax4: tax4,
       discountOnCheck: discountOnCheck,
+      customerInfo: customerInfo,
     );
   }
 }

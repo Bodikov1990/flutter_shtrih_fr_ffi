@@ -17,6 +17,9 @@ abstract class KkmLocalDatasource {
 
   /// Prints a report with cleaning.
   Future<void> printReportWithCleaning(String jsonParams);
+
+  /// Sends a custom TLV tag.
+  Future<void> sendTag(String jsonParams);
 }
 
 /// Default implementation of [KkmLocalDatasource] using `compute` to run
@@ -45,4 +48,9 @@ class KkmLocalDatasourceImpl implements KkmLocalDatasource {
   /// Runs print report with cleaning in a background isolate.
   Future<void> printReportWithCleaning(String jsonParams) =>
       compute(backgroundPrintReportWithCleaning, jsonParams);
+
+  @override
+  /// Runs send tag command in a background isolate.
+  Future<void> sendTag(String jsonParams) =>
+      compute(backgroundSendTag, jsonParams);
 }

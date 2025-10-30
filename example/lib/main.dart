@@ -124,6 +124,33 @@ class _StrihFrDemoScreenState extends State<StrihFrDemoScreen> {
             ElevatedButton(
               onPressed:
                   () => _run(
+                    () => _strihFr.saleAndCloseCheck(
+                      reportParams: _reportParams,
+                      items: _examplePositions,
+                      totalSumm1: _totalSum,
+                      totalSumm2: 0,
+                      totalSumm3: 0,
+                      totalSumm4: 0,
+                      department: 1,
+                      tax1: 0,
+                      tax2: 0,
+                      tax3: 0,
+                      tax4: 0,
+                      discountOnCheck: 0.0,
+                      // ⭐ Send customer email and TIN
+                      customerInfo: CustomerInfo(
+                        email: 'client@example.com',
+                        tin: '123456789012',
+                      ),
+                    ),
+                    'Sale with Customer Info done',
+                  ),
+              child: const Text('Sale + Email + TIN'),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton(
+              onPressed:
+                  () => _run(
                     () => _strihFr.returnSale(
                       reportParams: _reportParams,
                       items: _examplePositions,
